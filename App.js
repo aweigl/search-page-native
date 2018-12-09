@@ -1,50 +1,47 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
+import ApolloClient from 'apollo-boost';
+import { KeepAwake, registerRootComponent } from 'expo';
 
-export default class App extends React.Component {
-  state = {
-    text: ""
-  };
-  handleInputChange = text => {
-    this.setState({
-      text
+import { env } from './src/app/config/env';
+import SearchContainer from './src/app/Views/Search';
+import FetchContainer from './src/app/containers/FetchContainer';
+import rootReducers from './src/app/reducers';
+
+const accessToken = '';
+
+const client = new ApolloClient({
+  uri: env.graphqlUrl,
+  fetchOptions: {
+    credentials: 'include',
+  },
+  request: async operation => {
+    operation.setContext({
+      headers: {
+        authorization: accessToken ? `Bearer ${accessToken}` : '',
+      },
     });
-  };
-  render() {
-    const { text } = this.state;
+  },
+});
 
+const store = createStore(rootReducers);
+
+console.log('reload?');
+
+class App extends React.Component {
+  render() {
     return (
-      <View style={styles.container}>
-        {text ? (
-          <Text style={{ marginBottom: 16, fontSize: 25, color: "red" }}>
-            {text}
-          </Text>
-        ) : null}
-        <Text style={{ marginBottom: 16 }}>
-          Start typing and see the sreen change!
-        </Text>
-        <TextInput
-          onChangeText={text => this.handleInputChange(text)}
-          placeholder="start typing..."
-          style={{
-            height: 30,
-            width: "80%",
-            borderWidth: 1,
-            borderColor: "gray",
-            borderRadius: 3
-          }}
-        />
-      </View>
+      <Provider store={store}>
+        <FetchContainer>
+          <SearchContainer />
+        </FetchContainer>
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+KeepAwake.activate();
+
+registerRootComponent(App);

@@ -1,20 +1,45 @@
 {
   "name": "empty-project-template",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "App.js",
   "private": true,
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --ios",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "clean": "rm -rf node_modules/ rm package-lock.json/ rm yarn.lock"
   },
   "dependencies": {
+    "@emotion/native": "^9.2.9",
+    "apollo-boost": "^0.1.21",
+    "axios": "^0.18.0",
+    "base-64": "^0.1.0",
+    "bin-version-check": "^4.0.0",
+    "emotion": "^9.2.12",
+    "emotion-theming": "^9.2.9",
     "expo": "^31.0.2",
+    "expo-cli": "^2.6.8",
+    "global": "^4.3.2",
+    "graphql-tag": "^2.10.0",
+    "js-cookies": "^1.0.4",
+    "node-libs-react-native": "^1.0.3",
+    "opn": "^5.4.0",
+    "os": "^0.1.1",
     "react": "16.5.0",
+    "react-apollo": "^2.3.1",
+    "react-dom": "^16.6.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-    "styled-components": "^4.0.3"
+    "react-native-base64": "^0.0.2",
+    "react-native-level-fs": "^3.0.1",
+    "react-native-udp": "^2.3.1",
+    "react-redux": "^5.1.1",
+    "react-redux-i18n": "^1.9.3",
+    "react-router-native": "^4.3.0",
+    "redux": "^4.0.1",
+    "rn-nodeify": "^10.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
     "babel-eslint": "^10.0.1",
     "babel-preset-expo": "^5.0.0",
     "eslint": "^5.9.0",
@@ -22,5 +47,17 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1"
+  },
+  "react-native": {
+    "console": "console-browserify",
+    "path": "path-browserify",
+    "fs": "react-native-level-fs",
+    "dgram": "react-native-udp"
+  },
+  "browser": {
+    "console": "console-browserify",
+    "path": "path-browserify",
+    "fs": "react-native-level-fs",
+    "dgram": "react-native-udp"
   }
 }

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "search-page-native",
-    "description": "This project is really great.",
+    "description": "Mobile search page.",
     "slug": "search-page-native",
     "privacy": "public",
     "sdkVersion": "31.0.0",
@@ -17,9 +17,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     }
